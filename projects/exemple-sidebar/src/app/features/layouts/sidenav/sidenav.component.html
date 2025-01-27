@@ -1,0 +1,30 @@
+<div class="sidenav {{ collapsed ? 'sidenav-collapsed' : '' }}">
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapsed()">A</button>
+    @if (collapsed) {
+      <div class="logo-text" @fadeInOut>Angular</div>
+    }
+    @if (collapsed) {
+      <button class="button-close" @rotate (click)="closeSidenav()">
+        <i class="bi bi-x-lg close-icon"></i>
+      </button>
+    }
+  </div>
+  <ul class="sidenav-nav">
+    @for (data of navData; track data.routeLink) {
+      <li class="sidenav-nav-item">
+        <a
+          class="sidenav-nav-link"
+          [routerLink]="[data.routeLink]"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active"
+        >
+          <i class="sidenav-link-icon {{ data.icon }}"></i>
+          @if (collapsed) {
+            <span class="sidenav-link-text" @fadeInOut>{{ data.label }}</span>
+          }
+        </a>
+      </li>
+    }
+  </ul>
+</div>
